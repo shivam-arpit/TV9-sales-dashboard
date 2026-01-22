@@ -75,15 +75,7 @@ function initDashboard() {
     });
 }
 
-// Enhanced Bar Chart Data
-const clientData = [
-    { name: 'Star Brands Ltd', target: 600000, achieved: 520000, percentage: 86.7, color: '#10b981', category: 'high' },
-    { name: 'MediaCorp India', target: 500000, achieved: 450000, percentage: 90.0, color: '#3b82f6', category: 'high' },
-    { name: 'Premier Foods', target: 450000, achieved: 380000, percentage: 84.4, color: '#8b5cf6', category: 'medium' },
-    { name: 'AutoMax Group', target: 350000, achieved: 310000, percentage: 88.6, color: '#f59e0b', category: 'high' },
-    { name: 'HealthFirst Pharma', target: 300000, achieved: 220000, percentage: 73.3, color: '#ef4444', category: 'low' }
-];
-
+// Enhanced Bar Chart Data - REMOVED CLIENT DATA
 const productData = [
     { name: 'FCT', target: 1200000, achieved: 950000, percentage: 79.2, color: '#3b82f6', category: 'medium' },
     { name: 'Sponsorship', target: 800000, achieved: 625000, percentage: 78.1, color: '#8b5cf6', category: 'medium' },
@@ -102,17 +94,16 @@ let currentFilter = 'all';
 let currentSort = 'achievement';
 
 function initEnhancedBarCharts() {
-    renderClientChart();
-    renderProductChart();
     renderMonthChart();
+    renderProductChart();
     initChartControls();
     initChartInteractions();
 }
 
-function renderClientChart() {
-    const chartMain = document.getElementById('client-chart-main');
-    const xAxis = document.getElementById('client-x-axis');
-    const insights = document.querySelector('#client-insights .insight-list');
+function renderMonthChart() {
+    const chartMain = document.getElementById('month-chart-main');
+    const xAxis = document.getElementById('month-x-axis');
+    const insights = document.querySelector('#month-insights .insight-list');
     
     if (!chartMain || !xAxis || !insights) return;
     
@@ -121,43 +112,43 @@ function renderClientChart() {
     insights.innerHTML = '';
     
     // Sort data based on current selection
-    const sortedData = sortChartData([...clientData], currentSort);
+    const sortedData = sortChartData([...monthData], currentSort);
     
     // Apply filter
     const filteredData = applyChartFilterToData(sortedData, currentFilter);
     
     const maxValue = Math.max(...filteredData.map(item => item.target)) || 1;
     
-    // Update totals
-    updateChartTotals(filteredData);
+    // Update totals for month chart
+    updateMonthChartTotals(filteredData);
     
-    filteredData.forEach((client, index) => {
+    filteredData.forEach((month, index) => {
         // Create bar group
-        const barGroup = createBarGroup(client, maxValue, 'client');
+        const barGroup = createBarGroup(month, maxValue, 'month');
         chartMain.appendChild(barGroup);
         
         // Create x-axis label
         const xLabel = document.createElement('div');
         xLabel.className = 'x-label';
-        xLabel.textContent = client.name;
-        xLabel.setAttribute('data-client', client.name);
-        xLabel.setAttribute('data-category', client.category);
+        xLabel.textContent = month.name;
+        xLabel.setAttribute('data-month', month.name);
+        xLabel.setAttribute('data-category', month.category);
         xAxis.appendChild(xLabel);
         
         // Add click event to x-axis label
         xLabel.addEventListener('click', () => {
-            highlightClient(client.name);
-            showClientDetails(client);
+            highlightMonth(month.name);
+            showMonthDetails(month);
         });
         
         // Add double-click for quick actions
         xLabel.addEventListener('dblclick', () => {
-            quickActionPopup(client);
+            quickActionPopup(month);
         });
     });
     
     // Update insights
-    updateClientInsights(filteredData);
+    updateMonthInsights(filteredData);
     updateSummaryCards(filteredData);
     
     // Apply current view style
@@ -191,7 +182,8 @@ function renderProductChart() {
         xAxis.appendChild(xLabel);
         
         xLabel.addEventListener('click', () => {
-            showProductAnalysis(product);
+            highlightProduct(product.name);
+            showProductDetails(product);
         });
         
         xLabel.addEventListener('dblclick', () => {
@@ -200,41 +192,6 @@ function renderProductChart() {
     });
     
     updateProductInsights(filteredData);
-    applyChartViewStyle();
-}
-
-function renderMonthChart() {
-    const chartMain = document.getElementById('month-chart-main');
-    const xAxis = document.getElementById('month-x-axis');
-    const insights = document.querySelector('#month-insights .insight-list');
-    
-    if (!chartMain || !xAxis || !insights) return;
-    
-    chartMain.innerHTML = '';
-    xAxis.innerHTML = '';
-    insights.innerHTML = '';
-    
-    const sortedData = sortChartData([...monthData], currentSort);
-    const filteredData = applyChartFilterToData(sortedData, currentFilter);
-    
-    const maxValue = Math.max(...filteredData.map(item => item.target)) || 1;
-    
-    filteredData.forEach(month => {
-        const barGroup = createBarGroup(month, maxValue, 'month');
-        chartMain.appendChild(barGroup);
-        
-        const xLabel = document.createElement('div');
-        xLabel.className = 'x-label';
-        xLabel.textContent = month.name;
-        xLabel.setAttribute('data-category', month.category);
-        xAxis.appendChild(xLabel);
-        
-        xLabel.addEventListener('click', () => {
-            showMonthAnalysis(month);
-        });
-    });
-    
-    updateMonthInsights(filteredData);
     applyChartViewStyle();
 }
 
@@ -353,7 +310,7 @@ function createBarGroup(item, maxValue, type) {
 function initChartControls() {
     console.log('Initializing chart controls...');
     
-    // Toggle buttons (Client/Product/Month views)
+    // Toggle buttons (Month/Product views)
     const toggleButtons = document.querySelectorAll('.chart-toggle .toggle-btn');
     const chartWrappers = document.querySelectorAll('.chart-wrapper');
     
@@ -384,7 +341,7 @@ function initChartControls() {
         });
     });
     
-    // Sort control - FIXED
+    // Sort control
     const sortSelect = document.getElementById('sortBy');
     if (sortSelect) {
         console.log('Sort select found');
@@ -394,11 +351,9 @@ function initChartControls() {
             reRenderCurrentChart();
             showToast(`Sorted by ${getSortLabel(currentSort)}`);
         });
-    } else {
-        console.log('Sort select NOT found');
     }
     
-    // View toggle buttons (Bars/Stacked/Comparison) - FIXED
+    // View toggle buttons (Bars/Stacked/Comparison)
     const viewButtons = document.querySelectorAll('.view-toggle .view-btn');
     if (viewButtons.length > 0) {
         viewButtons.forEach(button => {
@@ -415,7 +370,7 @@ function initChartControls() {
         });
     }
     
-    // Legend filter - FIXED
+    // Legend filter
     const legendItems = document.querySelectorAll('.chart-legend .legend-item[data-filter]');
     legendItems.forEach(item => {
         item.addEventListener('click', function() {
@@ -465,30 +420,30 @@ function initChartInteractions() {
     }, 250));
 }
 
-function updateChartTotals(data) {
+function updateMonthChartTotals(data) {
     if (data.length === 0) {
-        data = clientData; // Fallback to show something
+        data = monthData; // Fallback to show something
     }
     
     const totalTarget = data.reduce((sum, item) => sum + item.target, 0);
     const totalAchieved = data.reduce((sum, item) => sum + item.achieved, 0);
     const overallPercentage = totalTarget > 0 ? (totalAchieved / totalTarget * 100).toFixed(1) : 0;
     
-    // Update display
-    const totalTargetEl = document.getElementById('total-target');
-    const totalAchievedEl = document.getElementById('total-achieved');
-    const overallPercentageEl = document.getElementById('overall-percentage');
-    
-    if (totalTargetEl) totalTargetEl.textContent = formatCurrency(totalTarget);
-    if (totalAchievedEl) totalAchievedEl.textContent = formatCurrency(totalAchieved);
-    if (overallPercentageEl) {
-        overallPercentageEl.textContent = `${overallPercentage}%`;
-        overallPercentageEl.className = `stat-value ${overallPercentage >= 85 ? 'highlight' : overallPercentage >= 70 ? 'warning' : 'danger'}`;
+    // Update display if we have elements for month chart
+    const monthStats = document.querySelector('#month-chart .chart-stats');
+    if (monthStats) {
+        // Update or create stat items
+        const existingItems = monthStats.querySelectorAll('.stat-item');
+        if (existingItems.length >= 2) {
+            // Update existing items
+            existingItems[0].querySelector('.stat-value').textContent = formatCurrency(totalTarget);
+            existingItems[1].querySelector('.stat-value').textContent = `${overallPercentage}%`;
+        }
     }
 }
 
-function updateClientInsights(data) {
-    const insightsContainer = document.querySelector('#client-insights .insight-list');
+function updateMonthInsights(data) {
+    const insightsContainer = document.querySelector('#month-insights .insight-list');
     if (!insightsContainer) return;
     
     insightsContainer.innerHTML = '';
@@ -496,35 +451,50 @@ function updateClientInsights(data) {
     if (data.length === 0) {
         const insightEl = document.createElement('div');
         insightEl.className = 'insight-item neutral';
-        insightEl.innerHTML = '<div class="insight-title">No Data</div><div class="insight-text">No clients match the current filter</div>';
+        insightEl.innerHTML = '<div class="insight-title">No Data</div><div class="insight-text">No months match the current filter</div>';
         insightsContainer.appendChild(insightEl);
         return;
     }
     
-    // Find top performer
-    const topPerformer = [...data].sort((a, b) => b.percentage - a.percentage)[0];
+    // Find top month
+    const topMonth = [...data].sort((a, b) => b.percentage - a.percentage)[0];
     
-    // Find needs attention
-    const needsAttention = [...data].sort((a, b) => a.percentage - b.percentage)[0];
+    // Find lowest month
+    const lowestMonth = [...data].sort((a, b) => a.percentage - b.percentage)[0];
     
     // Calculate average
     const average = data.reduce((sum, item) => sum + item.percentage, 0) / data.length;
     
+    // Calculate trend
+    const sortedMonths = [...data].sort((a, b) => {
+        const monthOrder = { 'January': 1, 'February': 2, 'March': 3, 'April': 4, 'May': 5, 'June': 6 };
+        return monthOrder[a.name] - monthOrder[b.name];
+    });
+    
+    let trendText = 'Stable performance';
+    if (sortedMonths.length >= 2) {
+        const first = sortedMonths[0];
+        const last = sortedMonths[sortedMonths.length - 1];
+        const trend = last.percentage - first.percentage;
+        trendText = trend > 0 ? `Growing trend (+${trend.toFixed(1)}%)` : 
+                    trend < 0 ? `Declining trend (${trend.toFixed(1)}%)` : 'Stable performance';
+    }
+    
     // Create insights
     const insights = [
         {
-            title: 'Top Performer',
-            text: `${topPerformer.name} is leading with ${topPerformer.percentage.toFixed(1)}% achievement`,
+            title: 'Best Month',
+            text: `${topMonth.name} achieved ${topMonth.percentage.toFixed(1)}%`,
             type: 'success'
         },
         {
             title: 'Needs Attention',
-            text: `${needsAttention.name} needs focus (${needsAttention.percentage.toFixed(1)}%)`,
-            type: needsAttention.percentage < 70 ? 'warning' : 'neutral'
+            text: `${lowestMonth.name} at ${lowestMonth.percentage.toFixed(1)}%`,
+            type: lowestMonth.percentage < 70 ? 'warning' : 'neutral'
         },
         {
-            title: data.length > 1 ? 'Average' : 'Performance',
-            text: `${data.length > 1 ? 'Average achievement: ' : ''}${average.toFixed(1)}%`,
+            title: 'Monthly Average',
+            text: `Average: ${average.toFixed(1)}% - ${trendText}`,
             type: 'neutral'
         }
     ];
@@ -561,50 +531,34 @@ function updateProductInsights(data) {
         return;
     }
     
-    data.forEach(product => {
-        const insightEl = document.createElement('div');
-        insightEl.className = `insight-item ${product.percentage >= 80 ? 'success' : product.percentage >= 70 ? 'warning' : 'danger'}`;
-        
-        const titleEl = document.createElement('div');
-        titleEl.className = 'insight-title';
-        titleEl.textContent = product.name;
-        
-        const textEl = document.createElement('div');
-        textEl.className = 'insight-text';
-        textEl.textContent = `${product.percentage.toFixed(1)}% achievement (${formatCurrency(product.achieved)} of ${formatCurrency(product.target)})`;
-        
-        insightEl.appendChild(titleEl);
-        insightEl.appendChild(textEl);
-        insightsContainer.appendChild(insightEl);
-    });
-}
-
-function updateMonthInsights(data) {
-    const insightsContainer = document.querySelector('#month-insights .insight-list');
-    if (!insightsContainer) return;
+    // Find top product
+    const topProduct = [...data].sort((a, b) => b.percentage - a.percentage)[0];
     
-    insightsContainer.innerHTML = '';
+    // Find lowest product
+    const lowestProduct = [...data].sort((a, b) => a.percentage - b.percentage)[0];
     
-    if (data.length === 0) {
-        const insightEl = document.createElement('div');
-        insightEl.className = 'insight-item neutral';
-        insightEl.innerHTML = '<div class="insight-title">No Data</div><div class="insight-text">No months match the current filter</div>';
-        insightsContainer.appendChild(insightEl);
-        return;
-    }
+    // Calculate average
+    const average = data.reduce((sum, item) => sum + item.percentage, 0) / data.length;
     
+    // Calculate revenue contribution
+    const totalAchieved = data.reduce((sum, item) => sum + item.achieved, 0);
+    
+    // Create insights
     const insights = [
         {
-            title: 'Growth Trend',
-            text: data.length > 1 ? 'Performance analysis available' : 'Single month data',
+            title: 'Top Product',
+            text: `${topProduct.name}: ${topProduct.percentage.toFixed(1)}% (${formatCurrency(topProduct.achieved)})`,
             type: 'success'
         },
         {
-            title: 'Best Month',
-            text: data.length > 1 ? 
-                `${[...data].sort((a, b) => b.percentage - a.percentage)[0].name} showed highest achievement` : 
-                `${data[0].name}: ${data[0].percentage.toFixed(1)}%`,
-            type: 'success'
+            title: 'Needs Focus',
+            text: `${lowestProduct.name}: ${lowestProduct.percentage.toFixed(1)}%`,
+            type: lowestProduct.percentage < 70 ? 'warning' : 'neutral'
+        },
+        {
+            title: 'Revenue Mix',
+            text: `Average: ${average.toFixed(1)}% - Total: ${formatCurrency(totalAchieved)}`,
+            type: 'neutral'
         }
     ];
     
@@ -627,34 +581,91 @@ function updateMonthInsights(data) {
 }
 
 function updateSummaryCards(data) {
-    if (data.length === 0) {
-        data = clientData; // Fallback
-    }
+    // Determine which chart is active
+    const activeChart = document.querySelector('.chart-wrapper.active');
+    if (!activeChart) return;
     
-    // Find top performer
-    const topPerformer = [...data].sort((a, b) => b.percentage - a.percentage)[0];
+    const chartId = activeChart.id;
     
-    // Find needs attention
-    const needsAttention = [...data].sort((a, b) => a.percentage - b.percentage)[0];
-    
-    // Calculate trend (for demo)
-    const trend = data.length > 1 ? '+8% vs last quarter' : 'Single data point';
-    
-    // Update cards
-    const topPerformerEl = document.getElementById('top-performer');
-    const needsAttentionEl = document.getElementById('needs-attention');
-    const trendEl = document.getElementById('trend');
-    
-    if (topPerformerEl) {
-        topPerformerEl.textContent = `${topPerformer.name} - ${topPerformer.percentage.toFixed(1)}%`;
-    }
-    
-    if (needsAttentionEl) {
-        needsAttentionEl.textContent = `${needsAttention.name} - ${needsAttention.percentage.toFixed(1)}%`;
-    }
-    
-    if (trendEl) {
-        trendEl.textContent = trend;
+    if (chartId === 'month-chart') {
+        // Update for month chart
+        if (data.length === 0) {
+            data = monthData; // Fallback
+        }
+        
+        // Find top month
+        const topMonth = [...data].sort((a, b) => b.percentage - a.percentage)[0];
+        
+        // Find trend
+        const sortedMonths = [...data].sort((a, b) => {
+            const monthOrder = { 'January': 1, 'February': 2, 'March': 3, 'April': 4, 'May': 5, 'June': 6 };
+            return monthOrder[a.name] - monthOrder[b.name];
+        });
+        
+        let trend = 'Stable';
+        if (sortedMonths.length >= 2) {
+            const first = sortedMonths[0];
+            const last = sortedMonths[sortedMonths.length - 1];
+            const trendValue = last.percentage - first.percentage;
+            trend = trendValue > 0 ? `↑ ${trendValue.toFixed(1)}% vs start` : 
+                   trendValue < 0 ? `↓ ${Math.abs(trendValue).toFixed(1)}% vs start` : 'Stable';
+        }
+        
+        // Update cards
+        const topPerformerEl = document.getElementById('top-performer');
+        const needsAttentionEl = document.getElementById('needs-attention');
+        const trendEl = document.getElementById('trend');
+        
+        if (topPerformerEl) {
+            topPerformerEl.textContent = `${topMonth.name} - ${topMonth.percentage.toFixed(1)}%`;
+        }
+        
+        if (needsAttentionEl) {
+            // For months, we might not have a "needs attention" if all are good
+            const lowestMonth = [...data].sort((a, b) => a.percentage - b.percentage)[0];
+            needsAttentionEl.textContent = lowestMonth.percentage < 75 ? 
+                `${lowestMonth.name} - ${lowestMonth.percentage.toFixed(1)}%` : 'All months > 75%';
+        }
+        
+        if (trendEl) {
+            trendEl.textContent = trend;
+        }
+        
+    } else if (chartId === 'product-chart') {
+        // Update for product chart
+        if (data.length === 0) {
+            data = productData; // Fallback
+        }
+        
+        // Find top product
+        const topProduct = [...data].sort((a, b) => b.percentage - a.percentage)[0];
+        
+        // Find needs attention
+        const needsAttention = [...data].sort((a, b) => a.percentage - b.percentage)[0];
+        
+        // Calculate trend (average of all products)
+        const average = data.reduce((sum, item) => sum + item.percentage, 0) / data.length;
+        const previousAverage = 72.5; // Hardcoded for demo
+        const trendValue = average - previousAverage;
+        const trend = trendValue > 0 ? `↑ ${trendValue.toFixed(1)}% vs target` : 
+                     trendValue < 0 ? `↓ ${Math.abs(trendValue).toFixed(1)}% vs target` : 'On target';
+        
+        // Update cards
+        const topPerformerEl = document.getElementById('top-performer');
+        const needsAttentionEl = document.getElementById('needs-attention');
+        const trendEl = document.getElementById('trend');
+        
+        if (topPerformerEl) {
+            topPerformerEl.textContent = `${topProduct.name} - ${topProduct.percentage.toFixed(1)}%`;
+        }
+        
+        if (needsAttentionEl) {
+            needsAttentionEl.textContent = `${needsAttention.name} - ${needsAttention.percentage.toFixed(1)}%`;
+        }
+        
+        if (trendEl) {
+            trendEl.textContent = trend;
+        }
     }
 }
 
@@ -692,12 +703,10 @@ function reRenderCurrentChart() {
     
     console.log('Re-rendering chart:', chartId, 'with sort:', currentSort, 'filter:', currentFilter);
     
-    if (chartId === 'client-chart') {
-        renderClientChart();
+    if (chartId === 'month-chart') {
+        renderMonthChart();
     } else if (chartId === 'product-chart') {
         renderProductChart();
-    } else if (chartId === 'month-chart') {
-        renderMonthChart();
     }
 }
 
@@ -771,7 +780,7 @@ function applyChartViewStyle() {
     });
 }
 
-function highlightClient(clientName) {
+function highlightMonth(monthName) {
     // Remove previous highlights
     document.querySelectorAll('.bar-group').forEach(bar => {
         bar.style.boxShadow = 'none';
@@ -784,9 +793,9 @@ function highlightClient(clientName) {
         label.style.backgroundColor = 'transparent';
     });
     
-    // Highlight selected client
-    const targetBar = document.querySelector(`.bar-group[data-item="${clientName}"]`);
-    const targetLabel = document.querySelector(`.x-label[data-client="${clientName}"]`);
+    // Highlight selected month
+    const targetBar = document.querySelector(`.bar-group[data-item="${monthName}"]`);
+    const targetLabel = document.querySelector(`.x-label[data-month="${monthName}"]`);
     
     if (targetBar) {
         targetBar.style.boxShadow = '0 0 0 3px rgba(59, 130, 246, 0.5)';
@@ -800,6 +809,39 @@ function highlightClient(clientName) {
         targetLabel.style.fontWeight = '700';
         targetLabel.style.color = '#3b82f6';
         targetLabel.style.backgroundColor = 'rgba(59, 130, 246, 0.1)';
+        targetLabel.style.borderRadius = '4px';
+    }
+}
+
+function highlightProduct(productName) {
+    // Remove previous highlights
+    document.querySelectorAll('.bar-group').forEach(bar => {
+        bar.style.boxShadow = 'none';
+        bar.style.border = 'none';
+    });
+    
+    document.querySelectorAll('.x-label').forEach(label => {
+        label.style.fontWeight = 'normal';
+        label.style.color = '#6b7280';
+        label.style.backgroundColor = 'transparent';
+    });
+    
+    // Highlight selected product
+    const targetBar = document.querySelector(`.bar-group[data-item="${productName}"]`);
+    const targetLabel = document.querySelector(`.x-label[data-product="${productName}"]`);
+    
+    if (targetBar) {
+        targetBar.style.boxShadow = '0 0 0 3px rgba(16, 185, 129, 0.5)';
+        targetBar.style.border = '2px solid #10b981';
+        targetBar.style.borderRadius = '8px';
+        targetBar.style.padding = '4px';
+        targetBar.style.backgroundColor = 'rgba(16, 185, 129, 0.1)';
+    }
+    
+    if (targetLabel) {
+        targetLabel.style.fontWeight = '700';
+        targetLabel.style.color = '#10b981';
+        targetLabel.style.backgroundColor = 'rgba(16, 185, 129, 0.1)';
         targetLabel.style.borderRadius = '4px';
     }
 }
@@ -906,12 +948,8 @@ function hideEnhancedTooltip() {
 }
 
 function getItemData(name, type) {
-    // Search in client data
-    let item = clientData.find(item => item.name === name);
-    if (item) return item;
-    
     // Search in product data
-    item = productData.find(item => item.name === name);
+    let item = productData.find(item => item.name === name);
     if (item) return item;
     
     // Search in month data
@@ -919,21 +957,12 @@ function getItemData(name, type) {
     return item;
 }
 
-function showClientDetails(client) {
-    showToast(`Client: ${client.name}\nTarget: ${formatCurrency(client.target)}\nAchieved: ${formatCurrency(client.achieved)}\nPercentage: ${client.percentage.toFixed(1)}%`);
+function showMonthDetails(month) {
+    showToast(`Month: ${month.name}\nTarget: ${formatCurrency(month.target)}\nAchieved: ${formatCurrency(month.achieved)}\nPercentage: ${month.percentage.toFixed(1)}%`);
 }
 
-function showProductAnalysis(product) {
-    const analysis = `
-        Product: ${product.name}
-        Performance: ${product.percentage >= 80 ? 'Excellent' : product.percentage >= 70 ? 'Good' : 'Needs Improvement'}
-        Recommendation: ${product.percentage < 75 ? 'Focus on upselling and promotions' : 'Maintain current strategy'}
-    `;
-    showToast(analysis);
-}
-
-function showMonthAnalysis(month) {
-    showToast(`${month.name} Performance: ${month.percentage.toFixed(1)}%`);
+function showProductDetails(product) {
+    showToast(`Product: ${product.name}\nTarget: ${formatCurrency(product.target)}\nAchieved: ${formatCurrency(product.achieved)}\nPercentage: ${product.percentage.toFixed(1)}%`);
 }
 
 function quickActionPopup(item) {
@@ -1195,17 +1224,9 @@ function updateDashboardData(period) {
 
 function updateBarChartData(period) {
     // Simulate different data for different periods
-    let newClientData, newProductData, newMonthData;
+    let newProductData, newMonthData;
     
     if (period === 'Q2 2026') {
-        newClientData = [
-            { name: 'Star Brands Ltd', target: 650000, achieved: 0, percentage: 0, color: '#10b981', category: 'low' },
-            { name: 'MediaCorp India', target: 550000, achieved: 0, percentage: 0, color: '#3b82f6', category: 'low' },
-            { name: 'Premier Foods', target: 500000, achieved: 0, percentage: 0, color: '#8b5cf6', category: 'low' },
-            { name: 'AutoMax Group', target: 400000, achieved: 0, percentage: 0, color: '#f59e0b', category: 'low' },
-            { name: 'HealthFirst Pharma', target: 350000, achieved: 0, percentage: 0, color: '#ef4444', category: 'low' }
-        ];
-        
         newProductData = [
             { name: 'FCT', target: 1300000, achieved: 0, percentage: 0, color: '#3b82f6', category: 'low' },
             { name: 'Sponsorship', target: 900000, achieved: 0, percentage: 0, color: '#8b5cf6', category: 'low' },
@@ -1218,14 +1239,6 @@ function updateBarChartData(period) {
             { name: 'June', target: 950000, achieved: 0, percentage: 0, color: '#8b5cf6', category: 'low' }
         ];
     } else if (period === 'January 2026') {
-        newClientData = [
-            { name: 'Star Brands Ltd', target: 200000, achieved: 175000, percentage: 87.5, color: '#10b981', category: 'high' },
-            { name: 'MediaCorp India', target: 180000, achieved: 162000, percentage: 90.0, color: '#3b82f6', category: 'high' },
-            { name: 'Premier Foods', target: 150000, achieved: 120000, percentage: 80.0, color: '#8b5cf6', category: 'medium' },
-            { name: 'AutoMax Group', target: 120000, achieved: 108000, percentage: 90.0, color: '#f59e0b', category: 'high' },
-            { name: 'HealthFirst Pharma', target: 100000, achieved: 70000, percentage: 70.0, color: '#ef4444', category: 'low' }
-        ];
-        
         newProductData = [
             { name: 'FCT', target: 400000, achieved: 320000, percentage: 80.0, color: '#3b82f6', category: 'medium' },
             { name: 'Sponsorship', target: 300000, achieved: 225000, percentage: 75.0, color: '#8b5cf6', category: 'medium' },
@@ -1237,15 +1250,11 @@ function updateBarChartData(period) {
         ];
     } else {
         // Default to original data
-        newClientData = clientData;
         newProductData = productData;
         newMonthData = monthData;
     }
     
     // Update the global data arrays
-    clientData.length = 0;
-    clientData.push(...newClientData);
-    
     productData.length = 0;
     productData.push(...newProductData);
     
@@ -1273,22 +1282,22 @@ function simulateRealTimeUpdates() {
             }
         }
         
-        // Randomly update a bar chart value (for demo purposes)
-        if (Math.random() > 0.8 && clientData.length > 0) {
-            const randomIndex = Math.floor(Math.random() * clientData.length);
-            const randomClient = clientData[randomIndex];
+        // Randomly update a month chart value (for demo purposes)
+        if (Math.random() > 0.8 && monthData.length > 0) {
+            const randomIndex = Math.floor(Math.random() * monthData.length);
+            const randomMonth = monthData[randomIndex];
             
             // Add a small random amount to achievement
             const increment = Math.floor(Math.random() * 50000);
-            randomClient.achieved += increment;
-            randomClient.percentage = (randomClient.achieved / randomClient.target * 100);
-            randomClient.category = randomClient.percentage >= 85 ? 'high' : 
-                                   randomClient.percentage >= 70 ? 'medium' : 'low';
+            randomMonth.achieved += increment;
+            randomMonth.percentage = (randomMonth.achieved / randomMonth.target * 100);
+            randomMonth.category = randomMonth.percentage >= 85 ? 'high' : 
+                                   randomMonth.percentage >= 70 ? 'medium' : 'low';
             
-            // Re-render client chart if it's active
-            if (document.querySelector('#client-chart.active')) {
+            // Re-render month chart if it's active
+            if (document.querySelector('#month-chart.active')) {
                 reRenderCurrentChart();
-                showToast(`Update: ${randomClient.name} achieved ₹${increment.toLocaleString()}`);
+                showToast(`Update: ${randomMonth.name} achieved ₹${increment.toLocaleString()}`);
             }
         }
     }, 30000);
@@ -1356,7 +1365,6 @@ window.dashboardFunctions = {
     toggleClientDetails,
     formatCurrency,
     updateDashboardData,
-    renderClientChart,
-    renderProductChart,
-    renderMonthChart
+    renderMonthChart,
+    renderProductChart
 };
