@@ -1,0 +1,1157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TV Sales Dashboard - Rajesh Kumar</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- TOP HEADER - SALES SNAPSHOT -->
+        <div class="header-section">
+            <div class="header-content">
+                <div class="header-left">
+                    <h1>Rajesh Kumar</h1>
+                    <p>Senior Sales Executive - West Region</p>
+                </div>
+                <div class="header-right">
+                    <select id="periodSelect">
+                        <option value="Q1 2026">Q1 2026</option>
+                        <option value="Q2 2026">Q2 2026</option>
+                        <option value="January 2026">January 2026</option>
+                        <option value="February 2026">February 2026</option>
+                    </select>
+                    <button class="notification-btn" id="notificationBtn">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge">5</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- KPI Tiles -->
+            <div class="kpi-grid">
+                <div class="kpi-tile status-orange">
+                    <div class="kpi-header">
+                        <i class="fas fa-bullseye"></i>
+                        <span>Target</span>
+                    </div>
+                    <p class="kpi-value">₹25,00,000</p>
+                </div>
+
+                <div class="kpi-tile status-orange">
+                    <div class="kpi-header">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Achievement</span>
+                    </div>
+                    <p class="kpi-value">₹18,75,000</p>
+                </div>
+
+                <div class="kpi-tile status-orange">
+                    <div class="kpi-header">
+                        <i class="fas fa-chart-line"></i>
+                        <span>% Achieved</span>
+                    </div>
+                    <p class="kpi-value">75.0%</p>
+                </div>
+
+                <div class="kpi-tile status-blue">
+                    <div class="kpi-header">
+                        <i class="fas fa-dollar-sign"></i>
+                        <span>Expected Revenue</span>
+                    </div>
+                    <p class="kpi-value blue-text">₹21,50,000</p>
+                </div>
+
+                <div class="kpi-tile status-amber">
+                    <div class="kpi-header">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <span>Gap to Target</span>
+                    </div>
+                    <p class="kpi-value amber-text">₹6,25,000</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <!-- DAILY & WEEKLY FOCUS PANEL -->
+            <div class="content-card">
+                <h2>Daily & Weekly Focus</h2>
+                <div class="focus-grid">
+                    <!-- Today -->
+                    <div>
+                        <h3><i class="fas fa-calendar-day"></i> Today - Thursday, Jan 22</h3>
+                        <div class="task-list">
+                            <div class="task-item priority-high">
+                                <div class="task-header">
+                                    <div class="task-left">
+                                        <div class="priority-indicator high"></div>
+                                        <p class="task-client">MediaCorp India</p>
+                                    </div>
+                                    <p class="task-value">₹1,25,000</p>
+                                </div>
+                                <p class="task-stage">Negotiation</p>
+                                <div class="task-footer">
+                                    <i class="far fa-clock"></i>
+                                    <span>Today 3:00 PM</span>
+                                </div>
+                            </div>
+                            <div class="task-item priority-medium">
+                                <div class="task-header">
+                                    <div class="task-left">
+                                        <div class="priority-indicator medium"></div>
+                                        <p class="task-client">Star Brands Ltd</p>
+                                    </div>
+                                    <p class="task-value">₹85,000</p>
+                                </div>
+                                <p class="task-stage">Proposal</p>
+                                <div class="task-footer">
+                                    <i class="far fa-clock"></i>
+                                    <span>Today 5:00 PM</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- This Week -->
+                    <div>
+                        <h3><i class="fas fa-calendar-week"></i> This Week - High Value Deals</h3>
+                        <div class="task-list">
+                            <div class="task-item priority-high">
+                                <div class="task-header">
+                                    <div class="task-left">
+                                        <div class="priority-indicator high"></div>
+                                        <p class="task-client">Premier Foods</p>
+                                    </div>
+                                    <p class="task-value">₹2,10,000</p>
+                                </div>
+                                <p class="task-stage">Closed Deals</p>
+                                <div class="task-footer">
+                                    <i class="far fa-clock"></i>
+                                    <span>Due: Jan 24</span>
+                                </div>
+                            </div>
+                            <div class="task-item priority-medium">
+                                <div class="task-header">
+                                    <div class="task-left">
+                                        <div class="priority-indicator medium"></div>
+                                        <p class="task-client">AutoMax Group</p>
+                                    </div>
+                                    <p class="task-value">₹95,000</p>
+                                </div>
+                                <p class="task-stage">Opportunity</p>
+                                <div class="task-footer">
+                                    <i class="far fa-clock"></i>
+                                    <span>Due: Jan 25</span>
+                                </div>
+                            </div>
+                            <div class="task-item priority-high">
+                                <div class="task-header">
+                                    <div class="task-left">
+                                        <div class="priority-indicator high"></div>
+                                        <p class="task-client">HealthFirst Pharma</p>
+                                    </div>
+                                    <p class="task-value">₹1,50,000</p>
+                                </div>
+                                <p class="task-stage">Negotiation</p>
+                                <div class="task-footer">
+                                    <i class="far fa-clock"></i>
+                                    <span>Due: Jan 26</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                         <!-- PEERS CONTRIBUTION -->
+            <div class="content-card">
+                <h2><i class="fas fa-users"></i> Peers Contribution</h2>
+                <div class="peers-grid">
+                    <!-- Peer 1 -->
+                    <div class="peer-item">
+                        <div class="peer-avatar">AS</div>
+                        <div class="peer-info">
+                            <p class="peer-name">Anjali Sharma</p>
+                            <p class="peer-role">North Region</p>
+                        </div>
+                        <div class="peer-contribution">
+                            <div class="contribution-bar">
+                                <div class="contribution-fill" style="width: 85%"></div>
+                            </div>
+                            <span class="contribution-text">85%</span>
+                        </div>
+                    </div>
+
+                    <!-- Peer 2 -->
+                    <div class="peer-item">
+                        <div class="peer-avatar">RP</div>
+                        <div class="peer-info">
+                            <p class="peer-name">Rohit Patel</p>
+                            <p class="peer-role">East Region</p>
+                        </div>
+                        <div class="peer-contribution">
+                            <div class="contribution-bar">
+                                <div class="contribution-fill" style="width: 78%"></div>
+                            </div>
+                            <span class="contribution-text">78%</span>
+                        </div>
+                    </div>
+
+                    <!-- Peer 3 -->
+                    <div class="peer-item">
+                        <div class="peer-avatar">MS</div>
+                        <div class="peer-info">
+                            <p class="peer-name">Mohit Singh</p>
+                            <p class="peer-role">South Region</p>
+                        </div>
+                        <div class="peer-contribution">
+                            <div class="contribution-bar">
+                                <div class="contribution-fill" style="width: 82%"></div>
+                            </div>
+                            <span class="contribution-text">82%</span>
+                        </div>
+                    </div>
+
+                    <!-- Peer 4 -->
+                    <div class="peer-item">
+                        <div class="peer-avatar">SK</div>
+                        <div class="peer-info">
+                            <p class="peer-name">Sunita Kumar</p>
+                            <p class="peer-role">Central Region</p>
+                        </div>
+                        <div class="peer-contribution">
+                            <div class="contribution-bar">
+                                <div class="contribution-fill" style="width: 91%"></div>
+                            </div>
+                            <span class="contribution-text">91%</span>
+                        </div>
+                    </div>
+
+                    <!-- Peer 5 (You) -->
+                    <div class="peer-item current-user">
+                        <div class="peer-avatar">RK</div>
+                        <div class="peer-info">
+                            <p class="peer-name">Rajesh Kumar (You)</p>
+                            <p class="peer-role">West Region</p>
+                        </div>
+                        <div class="peer-contribution">
+                            <div class="contribution-bar">
+                                <div class="contribution-fill" style="width: 75%"></div>
+                            </div>
+                            <span class="contribution-text">75%</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="peers-summary">
+                    <div class="summary-item">
+                        <span class="summary-label">Team Average:</span>
+                        <span class="summary-value">82.2%</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Your Rank:</span>
+                        <span class="summary-value">5/5</span>
+                    </div>
+                </div>
+            </div>
+            <!-- PIPELINE & EXPECTED REVENUE -->
+            <div class="content-card">
+                <div class="pipeline-header">
+                    <h2>Sales Pipeline</h2>
+                    <div class="expected-revenue">
+                        <p>Total Expected Revenue</p>
+                        <p class="revenue-value">₹6,89,750</p>
+                    </div>
+                </div>
+
+                <div class="pipeline-container">
+                    <!-- Lead Stage -->
+                    <div class="pipeline-stage">
+                        <div class="stage-header">
+                            <h3>Lead</h3>
+                            <p>2 deals • ₹37,500 expected</p>
+                        </div>
+                        <div class="deal-list">
+                            <div class="deal-item">
+                                <p class="deal-client">TechVision Inc</p>
+                                <div class="deal-tags">
+                                    <span class="deal-type">FCT</span>
+                                    
+                                </div>
+                                <div class="deal-footer">
+                                    
+                                    <span>Feb 15</span>
+                                </div>
+                            </div>
+                            <div class="deal-item">
+                                <p class="deal-client">FashionHub</p>
+                                <div class="deal-tags">
+                                    <span class="deal-type">Sponsorship</span>
+                                   
+                                </div>
+                                <div class="deal-footer">
+                                    
+                                    <span>Feb 20</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Opportunity Stage -->
+                    <div class="pipeline-stage">
+                        <div class="stage-header">
+                            <h3>Opportunity</h3>
+                            <p>2 deals • ₹87,250 expected</p>
+                        </div>
+                        <div class="deal-list">
+                            <div class="deal-item">
+                                <p class="deal-client">AutoMax Group</p>
+                                <div class="deal-tags">
+                                    <span class="deal-type">LBAN</span>
+                                    <span class="deal-value">₹95,000</span>
+                                </div>
+                                <div class="deal-footer">
+                                    <span>50% prob</span>
+                                    <span>Jan 25</span>
+                                </div>
+                            </div>
+                            <div class="deal-item">
+                                <p class="deal-client">GreenEnergy Co</p>
+                                <div class="deal-tags">
+                                    <span class="deal-type">FCT</span>
+                                    <span class="deal-value">₹1,10,000</span>
+                                </div>
+                                <div class="deal-footer">
+                                    <span>45% prob</span>
+                                    <span>Feb 5</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Proposal Stage -->
+                    <div class="pipeline-stage">
+                        <div class="stage-header">
+                            <h3>Proposal</h3>
+                            <p>2 deals • ₹1,27,750 expected</p>
+                        </div>
+                        <div class="deal-list">
+                            <div class="deal-item">
+                                <p class="deal-client">Star Brands Ltd</p>
+                                <div class="deal-tags">
+                                    <span class="deal-type">FCT</span>
+                                    <span class="deal-value">₹85,000</span>
+                                </div>
+                                <div class="deal-footer">
+                                    <span>65% prob</span>
+                                    <span>Jan 22</span>
+                                </div>
+                            </div>
+                            <div class="deal-item">
+                                <p class="deal-client">Urban Retail</p>
+                                <div class="deal-tags">
+                                    <span class="deal-type">Sponsorship</span>
+                                    <span class="deal-value">₹1,25,000</span>
+                                </div>
+                                <div class="deal-footer">
+                                    <span>60% prob</span>
+                                    <span>Jan 28</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Negotiation Stage -->
+                    <div class="pipeline-stage">
+                        <div class="stage-header">
+                            <h3>Negotiation</h3>
+                            <p>2 deals • ₹2,12,500 expected</p>
+                        </div>
+                        <div class="deal-list">
+                            <div class="deal-item">
+                                <p class="deal-client">MediaCorp India</p>
+                                <div class="deal-tags">
+                                    <span class="deal-type">LBAN</span>
+                                    <span class="deal-value">₹1,25,000</span>
+                                </div>
+                                <div class="deal-footer">
+                                    <span>80% prob</span>
+                                    <span>Jan 22</span>
+                                </div>
+                            </div>
+                            <div class="deal-item">
+                                <p class="deal-client">HealthFirst Pharma</p>
+                                <div class="deal-tags">
+                                    <span class="deal-type">FCT</span>
+                                    <span class="deal-value">₹1,50,000</span>
+                                </div>
+                                <div class="deal-footer">
+                                    <span>75% prob</span>
+                                    <span>Jan 26</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Expected Closure Stage -->
+                    <div class="pipeline-stage">
+                        <div class="stage-header">
+                            <h3>Closed Deals</h3>
+                            <p>1 deal • ₹1,89,000 expected</p>
+                        </div>
+                        <div class="deal-list">
+                            <div class="deal-item">
+                                <p class="deal-client">Premier Foods</p>
+                                <div class="deal-tags">
+                                    <span class="deal-type">Sponsorship</span>
+                                    <span class="deal-value">₹2,10,000</span>
+                                </div>
+                                <div class="deal-footer">
+                                    <span>90% prob</span>
+                                    <span>Jan 24</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CLIENT & ACCOUNT INSIGHTS -->
+            <div class="content-card">
+                <h2><i class="fas fa-users"></i> Client & Account Insights</h2>
+                <div class="table-container">
+                    <table class="client-table">
+                        <thead>
+                            <tr>
+                                <th>Client</th>
+                                <th>Status</th>
+                                <th>Last Contact</th>
+                                <th class="text-right">Campaigns</th>
+                                <th class="text-right">Outstanding</th>
+                                <th class="text-right">Total Revenue</th>
+                                <th class="text-center"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Client 1 -->
+                            <tr class="client-row" data-client="0">
+                                <td class="client-name">MediaCorp India</td>
+                                <td><span class="status-badge active">active</span></td>
+                                <td>2 days ago</td>
+                                <td class="text-right">3</td>
+                                <td class="text-right">₹1,25,000</td>
+                                <td class="text-right">₹4,50,000</td>
+                                <td class="text-center"><i class="fas fa-chevron-right client-arrow"></i></td>
+                            </tr>
+                            <tr class="client-details-row" id="client-details-0">
+                                <td colspan="7">
+                                    <div class="client-details-grid">
+                                        <div>
+                                            <p class="details-title">Buying Pattern</p>
+                                            <p class="details-text">Prefers FCT packages during festive seasons. Average deal size: ₹1.5L</p>
+                                        </div>
+                                        <div>
+                                            <p class="details-title">Recent Activity</p>
+                                            <p class="details-text">Last campaign: Q4 2025 Festive. Performance: 98% delivery rate.</p>
+                                        </div>
+                                        <div>
+                                            <p class="details-title">Notes</p>
+                                            <p class="details-text">Decision maker: Priya Sharma (CMO). Prefers email communication.</p>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <!-- Client 2 -->
+                            <tr class="client-row" data-client="1">
+                                <td class="client-name">Premier Foods</td>
+                                <td><span class="status-badge active">active</span></td>
+                                <td>1 day ago</td>
+                                <td class="text-right">2</td>
+                                <td class="text-right">₹2,10,000</td>
+                                <td class="text-right">₹3,80,000</td>
+                                <td class="text-center"><i class="fas fa-chevron-right client-arrow"></i></td>
+                            </tr>
+                            <tr class="client-details-row" id="client-details-1">
+                                <td colspan="7">
+                                    <div class="client-details-grid">
+                                        <div>
+                                            <p class="details-title">Buying Pattern</p>
+                                            <p class="details-text">Seasonal advertiser, focuses on Q4 and festival periods.</p>
+                                        </div>
+                                        <div>
+                                            <p class="details-title">Recent Activity</p>
+                                            <p class="details-text">Currently negotiating Q2 extension. High likelihood of renewal.</p>
+                                        </div>
+                                        <div>
+                                            <p class="details-title">Notes</p>
+                                            <p class="details-text">Key contact: Rahul Verma (Marketing Head). Responds well to data-driven pitches.</p>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <!-- Client 3 -->
+                            <tr class="client-row" data-client="2">
+                                <td class="client-name">Star Brands Ltd</td>
+                                <td><span class="status-badge active">active</span></td>
+                                <td>3 days ago</td>
+                                <td class="text-right">4</td>
+                                <td class="text-right">₹85,000</td>
+                                <td class="text-right">₹5,20,000</td>
+                                <td class="text-center"><i class="fas fa-chevron-right client-arrow"></i></td>
+                            </tr>
+
+                            <!-- Client 4 -->
+                            <tr class="client-row" data-client="3">
+                                <td class="client-name">HealthFirst Pharma</td>
+                                <td><span class="status-badge at-risk">at-risk</span></td>
+                                <td>5 days ago</td>
+                                <td class="text-right">1</td>
+                                <td class="text-right">₹1,50,000</td>
+                                <td class="text-right">₹2,20,000</td>
+                                <td class="text-center"><i class="fas fa-chevron-right client-arrow"></i></td>
+                            </tr>
+
+                            <!-- Client 5 -->
+                            <tr class="client-row" data-client="4">
+                                <td class="client-name">AutoMax Group</td>
+                                <td><span class="status-badge active">active</span></td>
+                                <td>1 day ago</td>
+                                <td class="text-right">2</td>
+                                <td class="text-right">₹95,000</td>
+                                <td class="text-right">₹3,10,000</td>
+                                <td class="text-center"><i class="fas fa-chevron-right client-arrow"></i></td>
+                            </tr>
+
+                            <!-- Client 6 -->
+                            <tr class="client-row" data-client="5">
+                                <td class="client-name">Legacy Retail</td>
+                                <td><span class="status-badge dormant">dormant</span></td>
+                                <td>21 days ago</td>
+                                <td class="text-right">0</td>
+                                <td class="text-right">₹0</td>
+                                <td class="text-right">₹1,80,000</td>
+                                <td class="text-center"><i class="fas fa-chevron-right client-arrow"></i></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- INVENTORY AVAILABILITY -->
+            <div class="content-card">
+                <h2>Inventory Availability & Selling Opportunities</h2>
+                <div class="table-container">
+                    <table class="inventory-table">
+                        <thead>
+                            <tr>
+                                <th>Channel</th>
+                                <th class="text-center">Prime Time<br/>(6-11 PM)</th>
+                                <th class="text-center">Day Time<br/>(9 AM-6 PM)</th>
+                                <th class="text-center">Late Night<br/>(11 PM-2 AM)</th>
+                                <th class="text-center">Premium</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="channel-name">Star Plus</td>
+                                <td class="text-center">
+                                    <div class="inventory-bar limited"></div>
+                                    <span class="inventory-status">limited</span>
+                                </td>
+                                <td class="text-center">
+                                    <div class="inventory-bar available"></div>
+                                    <span class="inventory-status">available</span>
+                                </td>
+                                <td class="text-center">
+                                    <div class="inventory-bar available"></div>
+                                    <span class="inventory-status">available</span>
+                                </td>
+                                <td class="text-center">
+                                    <span class="premium-badge">Premium</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="channel-name">Colors TV</td>
+                                <td class="text-center">
+                                    <div class="inventory-bar sold"></div>
+                                    <span class="inventory-status">sold</span>
+                                </td>
+                                <td class="text-center">
+                                    <div class="inventory-bar available"></div>
+                                    <span class="inventory-status">available</span>
+                                </td>
+                                <td class="text-center">
+                                    <div class="inventory-bar available"></div>
+                                    <span class="inventory-status">available</span>
+                                </td>
+                                <td class="text-center">
+                                    <span class="premium-badge">Premium</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="channel-name">Sony TV</td>
+                                <td class="text-center">
+                                    <div class="inventory-bar available"></div>
+                                    <span class="inventory-status">available</span>
+                                </td>
+                                <td class="text-center">
+                                    <div class="inventory-bar available"></div>
+                                    <span class="inventory-status">available</span>
+                                </td>
+                                <td class="text-center">
+                                    <div class="inventory-bar limited"></div>
+                                    <span class="inventory-status">limited</span>
+                                </td>
+                                <td class="text-center">
+                                    <span class="premium-badge">Premium</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="channel-name">Zee TV</td>
+                                <td class="text-center">
+                                    <div class="inventory-bar limited"></div>
+                                    <span class="inventory-status">limited</span>
+                                </td>
+                                <td class="text-center">
+                                    <div class="inventory-bar available"></div>
+                                    <span class="inventory-status">available</span>
+                                </td>
+                                <td class="text-center">
+                                    <div class="inventory-bar available"></div>
+                                    <span class="inventory-status">available</span>
+                                </td>
+                                <td class="text-center">
+                                    <span class="non-premium">Non-Premium</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="channel-name">Star Sports</td>
+                                <td class="text-center">
+                                    <div class="inventory-bar available"></div>
+                                    <span class="inventory-status">available</span>
+                                </td>
+                                <td class="text-center">
+                                    <div class="inventory-bar sold"></div>
+                                    <span class="inventory-status">sold</span>
+                                </td>
+                                <td class="text-center">
+                                    <div class="inventory-bar available"></div>
+                                    <span class="inventory-status">available</span>
+                                </td>
+                                <td class="text-center">
+                                    <span class="premium-badge">Premium</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="inventory-legend">
+                    <div class="legend-item">
+                        <div class="legend-color available"></div>
+                        <span>Available</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color limited"></div>
+                        <span>Limited</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color sold"></div>
+                        <span>Sold Out</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CAMPAIGN TRACKING -->
+            <div class="content-card">
+                <h2>Campaign Tracking & Delivery Status</h2>
+                <div class="campaign-list">
+                    <!-- Campaign 1 -->
+                    <div class="campaign-item">
+                        <div class="campaign-header">
+                            <div>
+                                <h3>Q1 Auto Launch</h3>
+                                <p>AutoMax Group</p>
+                            </div>
+                            <span class="campaign-status on-track">On Track</span>
+                        </div>
+                        
+                        <div class="campaign-metrics">
+                            <div>
+                                <div class="metric-header">
+                                    <span>Spots Delivered</span>
+                                    <span>98 / 120</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill green" style="width: 81.7%"></div>
+                                </div>
+                                <p class="progress-text">82% complete</p>
+                            </div>
+                            
+                            <div>
+                                <div class="metric-header">
+                                    <span>Revenue Billed</span>
+                                    <span>₹1,71,500 / ₹2,10,000</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill blue" style="width: 81.7%"></div>
+                                </div>
+                                <p class="progress-text">82% billed</p>
+                            </div>
+                        </div>
+                        
+                        <div class="campaign-footer">
+                            <span><i class="far fa-calendar"></i> Jan 1 - Mar 31</span>
+                        </div>
+                    </div>
+
+                    <!-- Campaign 2 -->
+                    <div class="campaign-item">
+                        <div class="campaign-header">
+                            <div>
+                                <h3>Health Awareness</h3>
+                                <p>HealthFirst Pharma</p>
+                            </div>
+                            <span class="campaign-status at-risk">At Risk</span>
+                        </div>
+                        
+                        <div class="campaign-metrics">
+                            <div>
+                                <div class="metric-header">
+                                    <span>Spots Delivered</span>
+                                    <span>25 / 80</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill red" style="width: 31.3%"></div>
+                                </div>
+                                <p class="progress-text">31% complete</p>
+                            </div>
+                            
+                            <div>
+                                <div class="metric-header">
+                                    <span>Revenue Billed</span>
+                                    <span>₹46,875 / ₹1,50,000</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill blue" style="width: 31.3%"></div>
+                                </div>
+                                <p class="progress-text">31% billed</p>
+                            </div>
+                        </div>
+                        
+                        <div class="campaign-footer">
+                            <span><i class="far fa-calendar"></i> Jan 15 - Feb 15</span>
+                        </div>
+                    </div>
+
+                    <!-- Campaign 3 -->
+                    <div class="campaign-item">
+                        <div class="campaign-header">
+                            <div>
+                                <h3>Premier Festive</h3>
+                                <p>Premier Foods</p>
+                            </div>
+                            <span class="campaign-status on-track">On Track</span>
+                        </div>
+                        
+                        <div class="campaign-metrics">
+                            <div>
+                                <div class="metric-header">
+                                    <span>Spots Delivered</span>
+                                    <span>145 / 150</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill green" style="width: 96.7%"></div>
+                                </div>
+                                <p class="progress-text">97% complete</p>
+                            </div>
+                            
+                            <div>
+                                <div class="metric-header">
+                                    <span>Revenue Billed</span>
+                                    <span>₹2,70,333 / ₹2,80,000</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill blue" style="width: 96.6%"></div>
+                                </div>
+                                <p class="progress-text">97% billed</p>
+                            </div>
+                        </div>
+                        
+                        <div class="campaign-footer">
+                            <span><i class="far fa-calendar"></i> Dec 1 - Jan 31</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- TARGET VS ACHIEVEMENT BREAKDOWN - ENHANCED BAR GRAPH -->
+<div class="content-card">
+    <h2>Target vs Achievement Breakdown</h2>
+    
+    <!-- Enhanced Toggle with icons -->
+    <div class="chart-toggle">
+        <button class="toggle-btn active" data-view="by-client">
+            <i class="fas fa-user-friends"></i> By Client
+        </button>
+        <button class="toggle-btn" data-view="by-product">
+            <i class="fas fa-box"></i> By Product Type
+        </button>
+        <button class="toggle-btn" data-view="by-month">
+            <i class="fas fa-calendar-alt"></i> By Month
+        </button>
+    </div>
+    
+    <!-- Chart Controls -->
+    <div class="chart-controls">
+        <div class="control-group">
+            <span class="control-label">Sort by:</span>
+            <select id="sortBy" class="control-select">
+                <option value="name">Name</option>
+                <option value="achievement">Achievement %</option>
+                <option value="target">Target Value</option>
+                <option value="achieved">Achieved Value</option>
+            </select>
+        </div>
+        <div class="control-group">
+            <span class="control-label">View:</span>
+            <div class="view-toggle">
+                <button class="view-btn active" data-view="bars">
+                    <i class="fas fa-chart-bar"></i>
+                </button>
+                <button class="view-btn" data-view="stacked">
+                    <i class="fas fa-chart-column"></i>
+                </button>
+                <button class="view-btn" data-view="comparison">
+                    <i class="fas fa-balance-scale"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Enhanced Chart Container -->
+    <div class="chart-container">
+        <!-- Client Chart -->
+        <div class="chart-wrapper active" id="client-chart">
+            <div class="chart-header">
+                <h3>Top 5 Clients - Target vs Achievement</h3>
+                <div class="chart-stats">
+                    <div class="stat-item">
+                        <span class="stat-label">Total Target:</span>
+                        <span class="stat-value" id="total-target">₹22,00,000</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Total Achieved:</span>
+                        <span class="stat-value" id="total-achieved">₹18,80,000</span>
+                    </div>
+                    <div class="stat-item highlight">
+                        <span class="stat-label">Achievement:</span>
+                        <span class="stat-value" id="overall-percentage">85.5%</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="chart-body">
+                <!-- Left: Y-axis with percentage labels -->
+                <div class="chart-y-axis">
+                    <div class="y-label">100%</div>
+                    <div class="y-label">75%</div>
+                    <div class="y-label">50%</div>
+                    <div class="y-label">25%</div>
+                    <div class="y-label">0%</div>
+                </div>
+                
+                <!-- Main chart area -->
+                <div class="chart-main" id="client-chart-main">
+                    <!-- Bars will be generated by JavaScript -->
+                </div>
+                
+                <!-- Right: Insights panel -->
+                <div class="chart-insights" id="client-insights">
+                    <h4><i class="fas fa-lightbulb"></i> Insights</h4>
+                    <div class="insight-list">
+                        <!-- Insights will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+            
+            <!-- X-axis labels -->
+            <div class="chart-x-axis" id="client-x-axis">
+                <!-- X-axis labels will be generated by JavaScript -->
+            </div>
+            
+            <!-- Interactive Legend -->
+            <div class="chart-legend">
+                <div class="legend-item active" data-filter="all">
+                    <div class="legend-color all"></div>
+                    <span>Show All</span>
+                </div>
+                <div class="legend-item" data-filter="high">
+                    <div class="legend-color high"></div>
+                    <span>High (>85%)</span>
+                </div>
+                <div class="legend-item" data-filter="medium">
+                    <div class="legend-color medium"></div>
+                    <span>Medium (70-85%)</span>
+                </div>
+                <div class="legend-item" data-filter="low">
+                    <div class="legend-color low"></div>
+                    <span>Low (<70%)</span>
+                </div>
+                <button class="legend-action" id="download-chart">
+                    <i class="fas fa-download"></i> Export
+                </button>
+            </div>
+        </div>
+        
+        <!-- Product Chart -->
+        <div class="chart-wrapper" id="product-chart">
+            <div class="chart-header">
+                <h3>By Product Type - Target vs Achievement</h3>
+                <div class="chart-stats">
+                    <div class="stat-item">
+                        <span class="stat-label">Best Performing:</span>
+                        <span class="stat-value highlight">FCT (79%)</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Needs Focus:</span>
+                        <span class="stat-value highlight">LBAN (60%)</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="chart-body">
+                <div class="chart-y-axis">
+                    <div class="y-label">100%</div>
+                    <div class="y-label">75%</div>
+                    <div class="y-label">50%</div>
+                    <div class="y-label">25%</div>
+                    <div class="y-label">0%</div>
+                </div>
+                
+                <div class="chart-main" id="product-chart-main">
+                    <!-- Product bars will be generated by JavaScript -->
+                </div>
+                
+                <div class="chart-insights" id="product-insights">
+                    <h4><i class="fas fa-lightbulb"></i> Insights</h4>
+                    <div class="insight-list">
+                        <!-- Insights will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+            
+            <div class="chart-x-axis" id="product-x-axis">
+                <!-- X-axis labels will be generated by JavaScript -->
+            </div>
+            
+            <div class="chart-legend">
+                <div class="legend-item active" data-filter="all">
+                    <div class="legend-color all"></div>
+                    <span>Show All</span>
+                </div>
+                <div class="legend-item" data-filter="high">
+                    <div class="legend-color high"></div>
+                    <span>High (>85%)</span>
+                </div>
+                <div class="legend-item" data-filter="medium">
+                    <div class="legend-color medium"></div>
+                    <span>Medium (70-85%)</span>
+                </div>
+                <div class="legend-item" data-filter="low">
+                    <div class="legend-color low"></div>
+                    <span>Low (<70%)</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Month Chart -->
+        <div class="chart-wrapper" id="month-chart">
+            <div class="chart-header">
+                <h3>Monthly Performance - Q1 2026</h3>
+                <div class="chart-stats">
+                    <div class="stat-item">
+                        <span class="stat-label">Best Month:</span>
+                        <span class="stat-value highlight">February (88%)</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Growth:</span>
+                        <span class="stat-value highlight">+12% vs Q4</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="chart-body">
+                <div class="chart-y-axis">
+                    <div class="y-label">100%</div>
+                    <div class="y-label">75%</div>
+                    <div class="y-label">50%</div>
+                    <div class="y-label">25%</div>
+                    <div class="y-label">0%</div>
+                </div>
+                
+                <div class="chart-main" id="month-chart-main">
+                    <!-- Month bars will be generated by JavaScript -->
+                </div>
+                
+                <div class="chart-insights" id="month-insights">
+                    <h4><i class="fas fa-lightbulb"></i> Insights</h4>
+                    <div class="insight-list">
+                        <!-- Insights will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+            
+            <div class="chart-x-axis" id="month-x-axis">
+                <!-- X-axis labels will be generated by JavaScript -->
+            </div>
+        </div>
+    </div>
+    
+    <!-- Summary Cards -->
+    <div class="chart-summary-cards">
+        <div class="summary-card highlight">
+            <div class="summary-card-icon">
+                <i class="fas fa-trophy"></i>
+            </div>
+            <div class="summary-card-content">
+                <p class="summary-card-label">Top Performer</p>
+                <p class="summary-card-value" id="top-performer">MediaCorp India - 90%</p>
+            </div>
+        </div>
+        <div class="summary-card warning">
+            <div class="summary-card-icon">
+                <i class="fas fa-exclamation-triangle"></i>
+            </div>
+            <div class="summary-card-content">
+                <p class="summary-card-label">Needs Attention</p>
+                <p class="summary-card-value" id="needs-attention">HealthFirst Pharma - 73%</p>
+            </div>
+        </div>
+        <div class="summary-card info">
+            <div class="summary-card-icon">
+                <i class="fas fa-chart-line"></i>
+            </div>
+            <div class="summary-card-content">
+                <p class="summary-card-label">Trend</p>
+                <p class="summary-card-value" id="trend">↑ 8% vs last quarter</p>
+            </div>
+        </div>
+    </div>
+</div>
+            
+
+
+            <!-- AI-POWERED INSIGHTS -->
+            <div class="content-card ai-insights">
+                <h2><i class="fas fa-chart-line blue-icon"></i> AI-Powered Sales Insights</h2>
+                
+                <div class="insights-grid">
+                    <div class="insight-card risk">
+                        <h3><i class="fas fa-exclamation-circle"></i> Top Deal Risks</h3>
+                        <ul class="insight-list">
+                            <li><span class="bullet red">•</span> HealthFirst Pharma deal at 75% - competitor offer detected. Suggest value-add package.</li>
+                            <li><span class="bullet red">•</span> Star Brands Ltd proposal pending 3 days - follow up with decision maker today.</li>
+                            <li><span class="bullet red">•</span> Legacy Retail dormant 21 days - high churn risk. Schedule review call.</li>
+                        </ul>
+                    </div>
+
+                    <div class="insight-card opportunity">
+                        <h3><i class="fas fa-chart-line"></i> Top Upsell Opportunities</h3>
+                        <ul class="insight-list">
+                            <li><span class="bullet green">•</span> Premier Foods showing 90% close probability - prepare upsell for Q2 extension.</li>
+                            <li><span class="bullet green">•</span> MediaCorp India has budget surplus - pitch additional LBAN inventory.</li>
+                            <li><span class="bullet green">•</span> Star Sports primetime available - match with AutoMax Group sports interest.</li>
+                        </ul>
+                    </div>
+
+                    <div class="insight-card renewals">
+                        <h3>Likely to Renew</h3>
+                        <ul class="insight-list">
+                            <li><i class="fas fa-check-circle blue-icon"></i> Premier Foods (90% likely)</li>
+                            <li><i class="fas fa-check-circle blue-icon"></i> MediaCorp India (85% likely)</li>
+                        </ul>
+                    </div>
+
+                    <div class="insight-card slipping">
+                        <h3>Deals Likely to Slip</h3>
+                        <ul class="insight-list">
+                            <li><i class="far fa-clock amber-icon"></i> Star Brands Ltd (proposal stage > 3 days)</li>
+                            <li><i class="far fa-clock amber-icon"></i> GreenEnergy Co (no contact 6 days)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- COLLABORATION & NOTES -->
+            <div class="content-card">
+                <h2><i class="fas fa-comments"></i> Collaboration & Notes</h2>
+                <div class="collaboration-list">
+                    <!-- Message 1 -->
+                    <div class="message-item">
+                        <div class="message-header">
+                            <div class="message-sender">
+                                <div class="sender-avatar ad">AD</div>
+                                <div>
+                                    <p class="sender-name">Anita Desai (Manager)</p>
+                                    <p class="message-time">2 hours ago</p>
+                                </div>
+                            </div>
+                            <span class="message-tag mention">Mention</span>
+                        </div>
+                        <p class="message-text">@RajeshKumar Great work on MediaCorp deal. Push for Q2 extension in next call.</p>
+                    </div>
+
+                    <!-- Message 2 -->
+                    <div class="message-item">
+                        <div class="message-header">
+                            <div class="message-sender">
+                                <div class="sender-avatar vs">VS</div>
+                                <div>
+                                    <p class="sender-name">Vikram Singh (Planner)</p>
+                                    <p class="message-time">5 hours ago</p>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="message-text">Star Sports prime time slots confirmed for AutoMax campaign. Updated inventory.</p>
+                    </div>
+
+                    <!-- Message 3 -->
+                    <div class="message-item">
+                        <div class="message-header">
+                            <div class="message-sender">
+                                <div class="sender-avatar rk">RK</div>
+                                <div>
+                                    <p class="sender-name">You</p>
+                                    <p class="message-time">Yesterday</p>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="message-text">Meeting notes: Premier Foods wants to expand to regional channels. Shared proposal draft.</p>
+                        <div class="file-attachment">
+                            <i class="fas fa-file-alt"></i>
+                            <span class="file-name">Premier_Q2_Proposal.pdf</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ALERTS BANNER -->
+            <div class="alert-banner">
+                <i class="fas fa-exclamation-circle"></i>
+                <div class="alert-content">
+                    <h3>Action Required</h3>
+                    <ul class="alert-list">
+                        <li>• 2 proposals awaiting approval from Anita Desai</li>
+                        <li>• Star Brands Ltd follow-up overdue by 3 days</li>
+                        <li>• Pipeline value below target - add ₹3.5L in opportunities this week</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
