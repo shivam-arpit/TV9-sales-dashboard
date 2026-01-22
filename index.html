@@ -174,7 +174,7 @@
                         <div class="peer-avatar">AS</div>
                         <div class="peer-info">
                             <p class="peer-name">Anjali Sharma</p>
-                            <p class="peer-role">North Region</p>
+                           
                         </div>
                         <div class="peer-contribution">
                             <div class="contribution-bar">
@@ -189,7 +189,7 @@
                         <div class="peer-avatar">RP</div>
                         <div class="peer-info">
                             <p class="peer-name">Rohit Patel</p>
-                            <p class="peer-role">East Region</p>
+                            
                         </div>
                         <div class="peer-contribution">
                             <div class="contribution-bar">
@@ -204,7 +204,7 @@
                         <div class="peer-avatar">MS</div>
                         <div class="peer-info">
                             <p class="peer-name">Mohit Singh</p>
-                            <p class="peer-role">South Region</p>
+                            
                         </div>
                         <div class="peer-contribution">
                             <div class="contribution-bar">
@@ -219,7 +219,7 @@
                         <div class="peer-avatar">SK</div>
                         <div class="peer-info">
                             <p class="peer-name">Sunita Kumar</p>
-                            <p class="peer-role">Central Region</p>
+                           
                         </div>
                         <div class="peer-contribution">
                             <div class="contribution-bar">
@@ -234,7 +234,7 @@
                         <div class="peer-avatar">RK</div>
                         <div class="peer-info">
                             <p class="peer-name">Rajesh Kumar (You)</p>
-                            <p class="peer-role">West Region</p>
+                           
                         </div>
                         <div class="peer-contribution">
                             <div class="contribution-bar">
@@ -245,14 +245,7 @@
                     </div>
                 </div>
                 <div class="peers-summary">
-                    <div class="summary-item">
-                        <span class="summary-label">Team Average:</span>
-                        <span class="summary-value">82.2%</span>
-                    </div>
-                    <div class="summary-item">
-                        <span class="summary-label">Your Rank:</span>
-                        <span class="summary-value">5/5</span>
-                    </div>
+                   
                 </div>
             </div>
             <!-- PIPELINE & EXPECTED REVENUE -->
@@ -792,14 +785,11 @@
     
     <!-- Enhanced Toggle with icons -->
     <div class="chart-toggle">
-        <button class="toggle-btn active" data-view="by-client">
-            <i class="fas fa-user-friends"></i> By Client
+        <button class="toggle-btn active" data-view="by-month">
+            <i class="fas fa-calendar-alt"></i> By Month
         </button>
         <button class="toggle-btn" data-view="by-product">
             <i class="fas fa-box"></i> By Product Type
-        </button>
-        <button class="toggle-btn" data-view="by-month">
-            <i class="fas fa-calendar-alt"></i> By Month
         </button>
     </div>
     
@@ -832,22 +822,18 @@
     
     <!-- Enhanced Chart Container -->
     <div class="chart-container">
-        <!-- Client Chart -->
-        <div class="chart-wrapper active" id="client-chart">
+        <!-- Month Chart - Now first -->
+        <div class="chart-wrapper active" id="month-chart">
             <div class="chart-header">
-                <h3>Top 5 Clients - Target vs Achievement</h3>
+                <h3>Monthly Performance - Q1 2026</h3>
                 <div class="chart-stats">
                     <div class="stat-item">
-                        <span class="stat-label">Total Target:</span>
-                        <span class="stat-value" id="total-target">₹22,00,000</span>
+                        <span class="stat-label">Best Month:</span>
+                        <span class="stat-value highlight">February (88%)</span>
                     </div>
                     <div class="stat-item">
-                        <span class="stat-label">Total Achieved:</span>
-                        <span class="stat-value" id="total-achieved">₹18,80,000</span>
-                    </div>
-                    <div class="stat-item highlight">
-                        <span class="stat-label">Achievement:</span>
-                        <span class="stat-value" id="overall-percentage">85.5%</span>
+                        <span class="stat-label">Growth:</span>
+                        <span class="stat-value highlight">+12% vs last quarter</span>
                     </div>
                 </div>
             </div>
@@ -863,12 +849,12 @@
                 </div>
                 
                 <!-- Main chart area -->
-                <div class="chart-main" id="client-chart-main">
-                    <!-- Bars will be generated by JavaScript -->
+                <div class="chart-main" id="month-chart-main">
+                    <!-- Month bars will be generated by JavaScript -->
                 </div>
                 
                 <!-- Right: Insights panel -->
-                <div class="chart-insights" id="client-insights">
+                <div class="chart-insights" id="month-insights">
                     <h4><i class="fas fa-lightbulb"></i> Insights</h4>
                     <div class="insight-list">
                         <!-- Insights will be populated by JavaScript -->
@@ -877,7 +863,7 @@
             </div>
             
             <!-- X-axis labels -->
-            <div class="chart-x-axis" id="client-x-axis">
+            <div class="chart-x-axis" id="month-x-axis">
                 <!-- X-axis labels will be generated by JavaScript -->
             </div>
             
@@ -905,7 +891,7 @@
             </div>
         </div>
         
-        <!-- Product Chart -->
+        <!-- Product Chart - Now second -->
         <div class="chart-wrapper" id="product-chart">
             <div class="chart-header">
                 <h3>By Product Type - Target vs Achievement</h3>
@@ -965,80 +951,9 @@
                 </div>
             </div>
         </div>
-        
-        <!-- Month Chart -->
-        <div class="chart-wrapper" id="month-chart">
-            <div class="chart-header">
-                <h3>Monthly Performance - Q1 2026</h3>
-                <div class="chart-stats">
-                    <div class="stat-item">
-                        <span class="stat-label">Best Month:</span>
-                        <span class="stat-value highlight">February (88%)</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-label">Growth:</span>
-                        <span class="stat-value highlight">+12% vs Q4</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="chart-body">
-                <div class="chart-y-axis">
-                    <div class="y-label">100%</div>
-                    <div class="y-label">75%</div>
-                    <div class="y-label">50%</div>
-                    <div class="y-label">25%</div>
-                    <div class="y-label">0%</div>
-                </div>
-                
-                <div class="chart-main" id="month-chart-main">
-                    <!-- Month bars will be generated by JavaScript -->
-                </div>
-                
-                <div class="chart-insights" id="month-insights">
-                    <h4><i class="fas fa-lightbulb"></i> Insights</h4>
-                    <div class="insight-list">
-                        <!-- Insights will be populated by JavaScript -->
-                    </div>
-                </div>
-            </div>
-            
-            <div class="chart-x-axis" id="month-x-axis">
-                <!-- X-axis labels will be generated by JavaScript -->
-            </div>
-        </div>
     </div>
     
-    <!-- Summary Cards -->
-    <div class="chart-summary-cards">
-        <div class="summary-card highlight">
-            <div class="summary-card-icon">
-                <i class="fas fa-trophy"></i>
-            </div>
-            <div class="summary-card-content">
-                <p class="summary-card-label">Top Performer</p>
-                <p class="summary-card-value" id="top-performer">MediaCorp India - 90%</p>
-            </div>
-        </div>
-        <div class="summary-card warning">
-            <div class="summary-card-icon">
-                <i class="fas fa-exclamation-triangle"></i>
-            </div>
-            <div class="summary-card-content">
-                <p class="summary-card-label">Needs Attention</p>
-                <p class="summary-card-value" id="needs-attention">HealthFirst Pharma - 73%</p>
-            </div>
-        </div>
-        <div class="summary-card info">
-            <div class="summary-card-icon">
-                <i class="fas fa-chart-line"></i>
-            </div>
-            <div class="summary-card-content">
-                <p class="summary-card-label">Trend</p>
-                <p class="summary-card-value" id="trend">↑ 8% vs last quarter</p>
-            </div>
-        </div>
-    </div>
+    
 </div>
             
 
